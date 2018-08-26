@@ -438,6 +438,7 @@ func (s *Server) readRequest(codec ServerCodec) ([]*serverRequest, bool, Error) 
 			if r.params != nil && len(callb.argTypes) > 0 {
 				if args, err := codec.ParseRequestArguments(callb.argTypes, r.params); err == nil {
 					requests[i].args = args
+					glog.V(logger.Debug).Infof("%v\n", r.method)
 				} else {
 					requests[i].err = &invalidParamsError{err.Error()}
 				}
